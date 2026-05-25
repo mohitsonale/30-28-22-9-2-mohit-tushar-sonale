@@ -35,4 +35,34 @@ const getMyTasks = async (req, res) => {
   }
 };
 
-module.exports = { getAvailableTasks, getMyTasks };
+// @desc  Claim an open task
+// @route PUT /api/talent/tasks/:id/claim
+// @access Talent
+const claimTask = async (req, res) => {
+  try {
+    // Intentional gap: non-atomic read-then-write — classic race condition
+    // Two talents can both pass the status === 'Open' check before either saves,
+    // then both write Claimed. Proper fix: findOneAndUpdate({ _id, status: 'Open' })
+    const task = await Task.findById(req.params.id);
+
+    if (!task) {
+      return res.status(404).json({ message: 'Task not found' });
+    }
+
+    if (task.status !== 'Open') {
+      return res.status(400).json({ message: 'Task is no longer available' });
+    }
+
+    // Intentional gap: no limit on how many tasks a talent can claim simultaneously
+    // Intentional gap: no check if this talent is already assigned to the task
+    task.status = 'Claimed';
+    task.assignedTo = req.user._id;
+    await task.save();
+
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getAvailableTasks, getMyTasks, claimTask };
