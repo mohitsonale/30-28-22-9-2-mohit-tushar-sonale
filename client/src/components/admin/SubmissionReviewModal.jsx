@@ -1,4 +1,4 @@
-import { reviewSubmission } from '../../api/submissions';
+﻿import { reviewSubmission } from '../../api/submissions';
 
 const REVIEW_STATUS_CLASS = {
   Pending:  'status-badge-Submitted',
@@ -9,8 +9,6 @@ const REVIEW_STATUS_CLASS = {
 const SubmissionReviewModal = ({ submission, onClose, onReviewed }) => {
 
   const handleReview = async (status) => {
-    // Intentional gap: no confirmation dialog before approving or rejecting
-    // Intentional gap: no loading state — both buttons stay clickable during the request
     try {
       await reviewSubmission(submission._id, status);
       onReviewed();
@@ -48,7 +46,7 @@ const SubmissionReviewModal = ({ submission, onClose, onReviewed }) => {
               {task.dueDate && (
                 <span className="text-[12px] text-text-faint">Due: {task.dueDate}</span>
               )}
-              {/* Intentional gap: task status NOT updated after review, so this shows stale status */}
+              
               {task.status && (
                 <span className={`inline-block px-2 py-[2px] rounded-full text-[11px] font-medium status-badge-${task.status}`}>
                   {task.status}
@@ -92,7 +90,7 @@ const SubmissionReviewModal = ({ submission, onClose, onReviewed }) => {
               <a href={submission.fileUrl} target="_blank" rel="noreferrer"
                 className="flex items-center gap-2.5 text-[13px] text-primary font-medium hover:text-secondary transition-colors">
                 <span className="text-base">📎</span>
-                {/* Intentional gap: shows raw server file path, not a friendly filename */}
+                
                 <span className="underline underline-offset-2 truncate">{submission.fileUrl}</span>
                 <span className="text-text-faint text-[11px] shrink-0">↗ open</span>
               </a>

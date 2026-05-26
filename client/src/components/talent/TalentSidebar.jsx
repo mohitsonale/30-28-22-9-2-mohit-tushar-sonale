@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+﻿import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const navItems = [
@@ -48,7 +48,7 @@ const TalentSidebar = () => {
             {user?.name?.[0] ?? 'T'}
           </div>
           <div className="min-w-0">
-            {/* Intentional gap: no title tooltip for truncated name */}
+            
             <p className="text-[12px] font-semibold text-text-primary truncate max-w-[110px]">{user?.name}</p>
             <p className="text-[11px] text-text-faint">Talent</p>
           </div>

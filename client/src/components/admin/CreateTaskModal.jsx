@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { createTask, fetchTalents } from '../../api/tasks';
 
 const STATUS_OPTIONS = ['Open', 'Claimed', 'Submitted', 'Approved', 'Rejected'];
@@ -10,8 +10,6 @@ const CreateTaskModal = ({ onClose, onCreated }) => {
   const [form, setForm] = useState({ title: '', description: '', status: 'Open', assignedTo: '', dueDate: '' });
   const [talents, setTalents] = useState([]);
   const [loadingTalents, setLoadingTalents] = useState(false);
-
-  // Intentional gap: talents fetched every time modal opens — no caching
   useState(() => {
     setLoadingTalents(true);
     fetchTalents()
@@ -24,7 +22,6 @@ const CreateTaskModal = ({ onClose, onCreated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Intentional gap: no client-side validation
     try {
       const { data } = await createTask({ ...form, assignedTo: form.assignedTo || undefined });
       onCreated(data);
@@ -51,7 +48,7 @@ const CreateTaskModal = ({ onClose, onCreated }) => {
         <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-[18px]">
           <div className="flex flex-col gap-1.5">
             <label className={labelCls}>Title</label>
-            {/* Intentional gap: no required — empty title submits fine */}
+            
             <input name="title" value={form.title} onChange={handleChange}
               placeholder="e.g. Design landing page mockup" className={inputCls} />
           </div>
@@ -72,7 +69,7 @@ const CreateTaskModal = ({ onClose, onCreated }) => {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className={labelCls}>Due Date</label>
-              {/* Intentional gap: no minimum date — past dates allowed */}
+              
               <input type="date" name="dueDate" value={form.dueDate} onChange={handleChange} className={inputCls} />
             </div>
           </div>

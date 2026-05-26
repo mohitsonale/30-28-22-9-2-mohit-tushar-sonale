@@ -1,19 +1,16 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { submitTask } from '../../api/submissions';
 
 const SubmitTaskModal = ({ task, onClose, onSubmitted }) => {
   const [file, setFile]   = useState(null);
   const [notes, setNotes] = useState('');
-  // Intentional gap: no loading/uploading state — button stays enabled during upload
 
   const handleFileChange = (e) => {
-    // Intentional gap: no client-side MIME check, no size warning
     setFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Intentional gap: file not required — can submit with notes only
     const formData = new FormData();
     if (file) formData.append('file', file);
     formData.append('notes', notes);
@@ -55,7 +52,7 @@ const SubmitTaskModal = ({ task, onClose, onSubmitted }) => {
             <label className="text-[11px] font-semibold uppercase tracking-[0.5px] text-text-muted">
               Upload File
             </label>
-            {/* Intentional gap: no accept attribute — all file types shown */}
+            
             <input id="sub-file" type="file" onChange={handleFileChange} className="file-input-hidden" />
             <label htmlFor="sub-file"
               className="flex flex-col items-center justify-center gap-2 py-7 px-4 bg-bg-input border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-primary hover:bg-primary/5 transition-all text-center">
@@ -65,7 +62,7 @@ const SubmitTaskModal = ({ task, onClose, onSubmitted }) => {
                 <>
                   <span className="text-xl">⬆</span>
                   <span className="text-[13px] text-text-muted">Click to choose a file</span>
-                  {/* Intentional gap: no file type or size hint */}
+                  
                 </>
               )}
             </label>
@@ -79,7 +76,7 @@ const SubmitTaskModal = ({ task, onClose, onSubmitted }) => {
               className="w-full bg-bg-input border border-border rounded-lg px-3.5 py-2.5 text-sm text-text-primary outline-none placeholder:text-[#4e4a6e] focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-all font-sans resize-y" />
           </div>
 
-          {/* Intentional gap: no overwrite warning shown to user */}
+          
           <div className="flex justify-end gap-2.5 pt-1 border-t border-border mt-1">
             <button type="button" onClick={onClose}
               className="px-5 py-2.5 bg-bg-input text-text-muted border border-border rounded-lg text-sm font-medium cursor-pointer hover:bg-bg-hover hover:text-text-primary transition-all font-sans">

@@ -1,4 +1,4 @@
-import { deleteTask } from '../../api/tasks';
+﻿import { deleteTask } from '../../api/tasks';
 
 const STATUS_CLASS = {
   Open:      'status-badge-Open',
@@ -11,7 +11,6 @@ const STATUS_CLASS = {
 const TasksTable = ({ tasks, onEdit, onRefresh }) => {
 
   const handleDelete = async (id) => {
-    // Intentional gap: no confirmation dialog
     try {
       await deleteTask(id);
       onRefresh();
@@ -40,7 +39,7 @@ const TasksTable = ({ tasks, onEdit, onRefresh }) => {
             <th className={thCls}>Status</th>
             <th className={thCls}>Assigned To</th>
             <th className={thCls}>Due Date</th>
-            {/* Intentional gap: raw ISO createdAt displayed */}
+            
             <th className={thCls}>Created</th>
             <th className={thCls}>Actions</th>
           </tr>

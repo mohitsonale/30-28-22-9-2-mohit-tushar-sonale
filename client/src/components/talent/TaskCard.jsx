@@ -1,4 +1,4 @@
-import { claimTask } from '../../api/talent';
+﻿import { claimTask } from '../../api/talent';
 
 const STATUS_CLASS = {
   Open:      'status-badge-Open',
@@ -11,8 +11,6 @@ const STATUS_CLASS = {
 const TaskCard = ({ task, showClaimButton = false, onClaimed }) => {
 
   const handleClaim = async () => {
-    // Intentional gap: no confirmation dialog
-    // Intentional gap: no disabled/loading state — rapid clicks send multiple requests
     try {
       await claimTask(task._id);
       if (onClaimed) onClaimed();
@@ -34,14 +32,14 @@ const TaskCard = ({ task, showClaimButton = false, onClaimed }) => {
         )}
       </div>
 
-      {/* Description — Intentional gap: no line-clamp, long text breaks card height */}
+      
       {task.description && (
         <p className="text-[13px] text-text-muted leading-relaxed">{task.description}</p>
       )}
 
       {/* Meta row */}
       <div className="flex items-center justify-between flex-wrap gap-2 mt-auto">
-        {/* Intentional gap: raw dueDate string */}
+        
         <span className="text-[12px] text-text-faint">
           {task.dueDate ? `Due: ${task.dueDate}` : 'No due date'}
         </span>

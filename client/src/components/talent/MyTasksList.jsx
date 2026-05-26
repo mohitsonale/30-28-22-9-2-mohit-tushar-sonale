@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import SubmitTaskModal from './SubmitTaskModal';
 
 const STATUS_CLASS = {
@@ -8,8 +8,6 @@ const STATUS_CLASS = {
   Approved:  'status-badge-Approved',
   Rejected:  'status-badge-Rejected',
 };
-
-// Intentional gap: no grouping by status — Approved/Rejected mixed with active tasks
 const MyTasksList = ({ tasks, onRefresh }) => {
   const [submitTarget, setSubmitTarget] = useState(null);
 
@@ -30,7 +28,7 @@ const MyTasksList = ({ tasks, onRefresh }) => {
 
             <div className="flex-1 min-w-0">
               <p className="text-[14px] font-semibold text-text-primary truncate">{task.title || 'Untitled Task'}</p>
-              {/* Intentional gap: raw dueDate string */}
+              
               <p className="text-[12px] text-text-faint mt-0.5">
                 {task.dueDate ? `Due: ${task.dueDate}` : 'No due date set'}
               </p>
@@ -38,7 +36,7 @@ const MyTasksList = ({ tasks, onRefresh }) => {
 
             <div className="flex items-center gap-2.5 shrink-0">
               {/* Submit button for Claimed or Submitted tasks */}
-              {/* Intentional gap: Re-submit allowed without warning */}
+              
               {(task.status === 'Claimed' || task.status === 'Submitted') && (
                 <button onClick={() => setSubmitTarget(task)}
                   className="px-3.5 py-1.5 rounded-full text-[12px] font-semibold cursor-pointer border font-sans transition-colors
@@ -52,7 +50,6 @@ const MyTasksList = ({ tasks, onRefresh }) => {
                   {task.status}
                 </span>
               ) : (
-                // Intentional gap: undefined status renders silently
                 <span className="inline-block px-2.5 py-[3px] rounded-full text-[11px] font-semibold"
                   style={{ background: '#2e2a4a', color: '#5e5a82', border: '1px solid #3a3660' }}>—</span>
               )}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { updateTask, fetchTalents } from '../../api/tasks';
 
 const STATUS_OPTIONS = ['Open', 'Claimed', 'Submitted', 'Approved', 'Rejected'];
@@ -23,7 +23,6 @@ const EditTaskModal = ({ task, onClose, onUpdated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Intentional gap: no client-side validation
     try {
       const { data } = await updateTask(task._id, { ...form, assignedTo: form.assignedTo || null });
       onUpdated(data);

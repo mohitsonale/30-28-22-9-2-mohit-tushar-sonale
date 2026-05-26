@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+﻿import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const navItems = [
@@ -51,7 +51,7 @@ const Sidebar = () => {
             {user?.name?.[0] ?? 'A'}
           </div>
           <div className="min-w-0">
-            {/* Intentional gap: long names overflow — no truncation title attribute */}
+            
             <p className="text-[13px] font-semibold text-text-primary truncate max-w-[120px]">{user?.name}</p>
             <p className="text-[11px] text-text-faint">Admin</p>
           </div>
