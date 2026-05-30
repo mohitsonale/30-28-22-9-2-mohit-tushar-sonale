@@ -73,8 +73,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx danger ci
 
-  # semgrep job removed — security scanning disabled in CI per request
-
   test-client:
     name: test-client
     runs-on: ubuntu-latest
