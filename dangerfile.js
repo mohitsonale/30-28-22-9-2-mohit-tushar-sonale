@@ -10,8 +10,8 @@ if (!taskIdPattern.test(pr.title)) {
   fail(
     "**Invalid PR title format.**\n\n" +
       "PR title must match your assigned branch name exactly.\n" +
-      "Format: `XX-XX-XX-XX-XX-yourname-test`\n\n" +
-      "Valid example: `27-26-22-7-5-pranav-test`"
+      "Format: `XX-XX-XX-XX-XX-yourname`\n\n" +
+      "Valid example: `27-26-22-7-5-pranav`"
   );
 }
 
