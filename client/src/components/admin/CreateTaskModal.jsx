@@ -1,10 +1,12 @@
-﻿import { useState } from 'react';
+﻿import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
+import { useState } from 'react';
 import { createTask, fetchTalents } from '../../api/tasks';
 
 const STATUS_OPTIONS = ['Open', 'Claimed', 'Submitted', 'Approved', 'Rejected'];
 
-const inputCls  = 'w-full bg-bg-input border border-border rounded-lg px-3.5 py-2.5 text-sm text-text-primary outline-none placeholder:text-[#4e4a6e] focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-all font-sans resize-y';
-const labelCls  = 'text-[11px] font-semibold uppercase tracking-[0.5px] text-text-muted';
+const inputCls = 'w-full bg-bg-input border border-border rounded-lg px-3.5 py-2.5 text-sm text-text-primary outline-none placeholder:text-[#4e4a6e] focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-all font-sans resize-y';
+const labelCls = 'text-[11px] font-semibold uppercase tracking-[0.5px] text-text-muted';
 
 const CreateTaskModal = ({ onClose, onCreated }) => {
   const [form, setForm] = useState({ title: '', description: '', status: 'Open', assignedTo: '', dueDate: '' });
@@ -48,15 +50,16 @@ const CreateTaskModal = ({ onClose, onCreated }) => {
         <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-[18px]">
           <div className="flex flex-col gap-1.5">
             <label className={labelCls}>Title</label>
-            
+
             <input name="title" value={form.title} onChange={handleChange}
               placeholder="e.g. Design landing page mockup" className={inputCls} />
           </div>
 
           <div className="flex flex-col gap-1.5">
             <label className={labelCls}>Description</label>
-            <textarea name="description" value={form.description} onChange={handleChange}
-              rows={3} placeholder="Describe the task deliverables..." className={inputCls} />
+            <ReactQuill theme="snow" value={form.description} onChange={(value) => setForm((prev) => ({ ...prev, description: value, }))}
+              placeholder="Describe the task deliverables..."
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -69,7 +72,7 @@ const CreateTaskModal = ({ onClose, onCreated }) => {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className={labelCls}>Due Date</label>
-              
+
               <input type="date" name="dueDate" value={form.dueDate} onChange={handleChange} className={inputCls} />
             </div>
           </div>

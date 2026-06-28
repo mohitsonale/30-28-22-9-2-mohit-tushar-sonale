@@ -1,4 +1,6 @@
-﻿import { useState } from 'react';
+﻿import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
+import { useState } from 'react';
 import { updateTask, fetchTalents } from '../../api/tasks';
 
 const STATUS_OPTIONS = ['Open', 'Claimed', 'Submitted', 'Approved', 'Rejected'];
@@ -7,16 +9,16 @@ const labelCls = 'text-[11px] font-semibold uppercase tracking-[0.5px] text-text
 
 const EditTaskModal = ({ task, onClose, onUpdated }) => {
   const [form, setForm] = useState({
-    title:       task.title       || '',
+    title: task.title || '',
     description: task.description || '',
-    status:      task.status      || 'Open',
-    assignedTo:  task.assignedTo?._id || '',
-    dueDate:     task.dueDate     || '',
+    status: task.status || 'Open',
+    assignedTo: task.assignedTo?._id || '',
+    dueDate: task.dueDate || '',
   });
   const [talents, setTalents] = useState([]);
 
   useState(() => {
-    fetchTalents().then(({ data }) => setTalents(data)).catch(() => {});
+    fetchTalents().then(({ data }) => setTalents(data)).catch(() => { });
   }, []);
 
   const handleChange = (e) => setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -52,7 +54,9 @@ const EditTaskModal = ({ task, onClose, onUpdated }) => {
 
           <div className="flex flex-col gap-1.5">
             <label className={labelCls}>Description</label>
-            <textarea name="description" value={form.description} onChange={handleChange} rows={3} className={inputCls} />
+            <ReactQuill theme="snow" value={form.description} onChange={(value) => setForm((prev) => ({ ...prev, description: value, }))}
+              placeholder="Describe the task..."
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
