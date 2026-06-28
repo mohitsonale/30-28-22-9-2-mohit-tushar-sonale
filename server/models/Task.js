@@ -1,4 +1,4 @@
-﻿const mongoose = require('mongoose');
+﻿  const mongoose = require('mongoose');
 const taskSchema = new mongoose.Schema(
   {
     title: {
@@ -20,7 +20,7 @@ const taskSchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'User', 
     },
   },
   { timestamps: true }
