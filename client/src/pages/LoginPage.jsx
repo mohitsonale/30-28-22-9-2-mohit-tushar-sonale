@@ -15,6 +15,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const { login }   = useAuth();
   const navigate    = useNavigate();
+  const [showPassword, setShowPassword]=useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,8 +50,12 @@ const LoginPage = () => {
 
           <div className="flex flex-col gap-2 group">
             <label className={labelCls} htmlFor="password">Password</label>
-            <input id="password" type="password" placeholder="••••••••"
+            <input  id="password" type={showPassword ? "text" : "password"} placeholder="••••••••"
               value={password} onChange={(e) => setPassword(e.target.value)} required className={inputCls} />
+            <button type="button" onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-[59%] -translate-y-[50%] text-sm text-text-muted hover:text-text-primary transition-colors duration-200">
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
           </div>
 
           <button type="submit"
