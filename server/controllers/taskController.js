@@ -56,6 +56,14 @@ const createTask = async (req, res) => {
         });
       }
     }
+
+    if(!title || title.trim()===""){
+      return res.status(400).json({ message: "Title is required" });
+    } 
+
+    if(!description || description.trim()===""){
+      return res.status(400).json({ message: "Description is required" });
+    }
     const task = await Task.create({
       title,
       description,
